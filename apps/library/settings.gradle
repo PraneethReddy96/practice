@@ -10,3 +10,4 @@ rootProject.name = "My Application"
 include ':app'
 include ':firstlibrary'
 include ':myapplication'
+include ':myapplication2'
