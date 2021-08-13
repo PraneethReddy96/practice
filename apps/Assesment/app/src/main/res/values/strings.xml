@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Assesment</string>
+    <string name="id">ID</string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="salary">Salary</string>
+</resources>
