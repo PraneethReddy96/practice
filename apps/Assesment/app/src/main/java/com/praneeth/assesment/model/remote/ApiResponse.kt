@@ -1,7 +1,5 @@
-package com.praneeth.assesment.remote
+package com.praneeth.assesment.model.remote
 
-import androidx.lifecycle.LiveData
-import com.praneeth.assesment.model.DataItem
 import com.praneeth.assesment.model.DummyResponse
 import retrofit2.http.GET
 

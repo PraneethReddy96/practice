@@ -10,9 +10,8 @@ import com.praneeth.assesment.R
 import com.praneeth.assesment.adapters.dummyAdapter
 import com.praneeth.assesment.model.DataItem
 import com.praneeth.assesment.viewmodel.myViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,23 +25,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         initViews()
         setRecylerAdapter()
+        fetchData()
+
+    }
+
+    private fun fetchData() {
+
+        viewModel.getDataFromRepository().observe(this, Observer {
+
+            dataList.clear()
+            dataList.addAll(it)
+            dummyAdapter.notifyDataSetChanged()
 
 
-        if(dataList.isEmpty()){
-
-            viewModel.getDataFromRepository().observe(this, Observer {
-
-                dataList.clear()
-                dataList.addAll(it)
-                dummyAdapter.notifyDataSetChanged()
-
-
-            })
-
-        }
+        })
 
     }
 
@@ -52,6 +50,10 @@ class MainActivity : AppCompatActivity() {
         dummyRecyclerView.layoutManager = llManager
         dummyAdapter = dummyAdapter(dataList)
         dummyRecyclerView.adapter = dummyAdapter
+
+
+
+
     }
 
     private fun initViews() {

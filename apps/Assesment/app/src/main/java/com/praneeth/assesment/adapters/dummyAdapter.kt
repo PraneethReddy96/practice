@@ -16,15 +16,12 @@ class dummyAdapter(val dataList: MutableList<DataItem>) : RecyclerView.Adapter<d
 
     override fun onBindViewHolder(holder: dummyViewHolder, position: Int) {
 
+            holder.tvName.text= "Name :" + dataList[position].employeeName.toString()
+            holder.tvID.text= "Id :" + dataList[position].id.toString()
+            holder.tvSalary.text= "Salary :" + dataList[position].employeeSalary.toString()
+            holder.tvAge.text= "Name :" + dataList[position].employeeAge.toString()
 
-        holder.apply {
 
-            tvName.text= "Name :" + dataList[position].employeeName
-            tvID.text= "Id :" + dataList[position].id
-            tvSalary.text= "Salary :" + dataList[position].employeeSalary
-            tvAge.text= "Name :" + dataList[position].employeeAge
-
-        }
     }
 
     override fun getItemCount(): Int {
