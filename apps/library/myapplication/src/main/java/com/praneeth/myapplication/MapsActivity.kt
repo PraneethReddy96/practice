@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.wear.widget.SwipeDismissFrameLayout
+import com.praneeth.firstlibrary.MakeToast
 import com.praneeth.myapplication.databinding.ActivityMapsBinding
 
 class MapsActivity : Activity(), OnMapReadyCallback {
@@ -31,6 +32,8 @@ class MapsActivity : Activity(), OnMapReadyCallback {
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        MakeToast.snackBar(this,"First library")
 
         // Enables the Swipe-To-Dismiss Gesture via the root layout (SwipeDismissFrameLayout).
         // Swipe-To-Dismiss is a standard pattern in Wear for closing an app and needs to be

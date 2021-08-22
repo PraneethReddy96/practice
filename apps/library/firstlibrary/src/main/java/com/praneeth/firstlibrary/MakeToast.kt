@@ -2,6 +2,7 @@ package com.praneeth.firstlibrary
 
 import android.content.Context
 import android.view.View
+import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 
 class MakeToast {
@@ -9,12 +10,11 @@ class MakeToast {
 
     companion object{
 
-        fun snackBar(context: Context, message: String, view: View){
+        fun snackBar(context: Context, message: String){
 
-            Snackbar.make(context,view,message,2000)
+            Toast.makeText(context,message,Toast.LENGTH_LONG).show()
 
         }
-
     }
 
 
