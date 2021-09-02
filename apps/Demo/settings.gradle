@@ -8,3 +8,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "demo"
 include ':app'
+include ':data1'
+include ':domain'
+include ':presentation'
+include ':data'
+include ':domainn'

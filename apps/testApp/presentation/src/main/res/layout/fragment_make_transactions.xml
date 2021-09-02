@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#194d6a"
+    tools:context=".MakeTransactionsFragment">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvTransactionContainerCardView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200"
+        android:layout_margin="@dimen/dp_40"
+        app:cardCornerRadius="@dimen/dp_20"
+        android:elevation="@dimen/dp_40"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etTransactionAmount"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_15"
+                android:textColor="@color/black"
+                android:padding="@dimen/dp_7"
+                android:background="@drawable/rectangle"
+                android:textSize="@dimen/sp_20"
+                android:maxLength="8"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Amount" />
+
+            <EditText
+                android:id="@+id/etTransactionTitle"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_15"
+                android:textColor="@color/black"
+                android:background="@drawable/rectangle"
+                android:padding="@dimen/dp_7"
+                android:maxLines="2"
+                android:textSize="@dimen/sp_20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Short Description" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnCredit"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_20"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/teal_200"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Credit" />
+
+                <Button
+                    android:id="@+id/btnDebit"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_20"
+                    android:textAllCaps="false"
+                    android:backgroundTint="#ff77"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Debit" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
