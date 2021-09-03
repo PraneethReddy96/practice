@@ -3,9 +3,13 @@ package com.praneeth.presentation.di
 import android.content.Context
 import androidx.room.Room
 import com.praneeth.data.JobExecutor
-import com.praneeth.data.TransactionsDataRepository
-import com.praneeth.data.room.TransactionsDao
-import com.praneeth.data.room.TransactionsDatabase
+import com.praneeth.data.repository.TransactionsDataRepository
+import com.praneeth.data.cache.transactions.TransactionsDao
+import com.praneeth.data.cache.transactions.TransactionsDatabase
+import com.praneeth.data.dataSource.transactions.TransactionsCacheDataSource
+import com.praneeth.data.dataSource.transactions.TransactionsDataSource
+import com.praneeth.data.dataSource.transactions.TransactionsDataSourceFactory
+import com.praneeth.data.mapper.TransactionDetailsDataMapper
 import com.praneeth.domain.executor.PostExecutionThread
 import com.praneeth.domain.executor.ThreadExecutor
 import com.praneeth.domain.repository.TransactionsRepository
@@ -30,15 +34,18 @@ object MainModule {
         context,
         TransactionsDatabase::class.java,
         "Money_Manager"
-    ).build()
+    ).fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides
     fun provideDao(database: TransactionsDatabase) = database.transactionsDao()
 
+
     @Singleton
     @Provides
-    fun provideMainRepository(dao: TransactionsDao): TransactionsRepository = TransactionsDataRepository(dao)
+    fun provideMainRepository(transactionsDataSourceFactory: TransactionsDataSourceFactory
+                              ,transactionsDetailsDataMapper: TransactionDetailsDataMapper):
+            TransactionsRepository = TransactionsDataRepository(transactionsDataSourceFactory,transactionsDetailsDataMapper)
 
     @JvmStatic
     @Singleton
@@ -53,7 +60,5 @@ object MainModule {
     fun providePostThreadExecutor(uiThread: UIThread): PostExecutionThread {
         return uiThread
     }
-
-
 
 }

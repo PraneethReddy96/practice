@@ -3,10 +3,10 @@ package com.praneeth.testapp.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.praneeth.domain.transactionsEntity
+import com.praneeth.domain.model.TransactionsModel
 import com.praneeth.testapp.R
 
-class TransactionsAdapter(val transactionList: MutableList<transactionsEntity>) : RecyclerView.Adapter<TransactionsViewHolder>() {
+class TransactionsAdapter(private val transactionList: MutableList<TransactionsModel>) : RecyclerView.Adapter<TransactionsViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionsViewHolder {

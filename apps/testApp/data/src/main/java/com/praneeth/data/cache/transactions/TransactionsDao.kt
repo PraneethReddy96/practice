@@ -1,26 +1,25 @@
-package com.praneeth.data.room
+package com.praneeth.data.cache.transactions
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.praneeth.domain.transactionsEntity
+import com.praneeth.data.entity.TransactionsEntity
 import io.reactivex.Observable
-
 
 @Dao
 interface TransactionsDao {
 
     @Insert
-    fun insertTransaction(transactionsEntity : transactionsEntity)
+    fun insertTransaction(TransactionsEntity: TransactionsEntity)
 
     @Query(value ="select * from Transactions order by id DESC")
-    fun getTransactions() : Observable<List<transactionsEntity>>
+    fun getTransactions() : Observable<List<TransactionsEntity>>
 
     @Query(value =  "SELECT * FROM Transactions WHERE id=(SELECT max(id) FROM Transactions)")
-    fun getLatestBalance() : transactionsEntity
+    fun getLatestBalance() : TransactionsEntity
 
 
     @Query("SELECT * FROM Transactions ORDER BY id LIMIT 1")
-    fun checkData(): transactionsEntity
+    fun checkData(): TransactionsEntity
 
 }

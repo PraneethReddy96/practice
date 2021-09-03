@@ -2,7 +2,6 @@ package com.praneeth.domain.interactor
 
 import com.praneeth.domain.executor.PostExecutionThread
 import com.praneeth.domain.executor.ThreadExecutor
-import com.praneeth.domain.transactionsEntity
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable

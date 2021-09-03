@@ -8,8 +8,7 @@ import com.praneeth.domain.interactor.CreditUseCase
 import com.praneeth.domain.interactor.DebitUseCase
 import com.praneeth.domain.interactor.GetMainBalanceUseCase
 import com.praneeth.domain.interactor.GetTransactionsListUseCase
-import com.praneeth.domain.repository.TransactionsRepository
-import com.praneeth.domain.transactionsEntity
+import com.praneeth.domain.model.TransactionsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
@@ -17,18 +16,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TransactionsViewModel @Inject constructor(
-    private val transactionsRepository: TransactionsRepository,
     private val getMainBalanceUseCase: GetMainBalanceUseCase,
     private val getTransactionsListUseCase: GetTransactionsListUseCase,
     private val creditUseCase: CreditUseCase,
-    private val debitUseCase: DebitUseCase
+    private val debitUseCase: DebitUseCase,
 
     ) : ViewModel() {
 
-    var entityLiveData: MutableLiveData<transactionsEntity> = MutableLiveData()
-    var entityListLiveData: MutableLiveData<List<transactionsEntity>> = MutableLiveData()
-    var transactionsEntityList: List<transactionsEntity> = mutableListOf()
-
+    var entityListLiveData: MutableLiveData<List<TransactionsModel>> = MutableLiveData()
+    var transactionsModelList: List<TransactionsModel> = mutableListOf()
 
 
     fun credit(title: String, transactionAmount: Double, type: String) {
@@ -40,10 +36,8 @@ class TransactionsViewModel @Inject constructor(
     }
 
     fun getTransactions() {
-        entityListLiveData.postValue(transactionsEntityList)
-        getTransactionsListUseCase.execute(object : DisposableObserver<List<transactionsEntity>>() {
-
-
+        entityListLiveData.postValue(transactionsModelList)
+        getTransactionsListUseCase.execute(object : DisposableObserver<List<TransactionsModel>>() {
             override fun onError(e: Throwable) {
                 Log.d(TAG, "onError: transaction error")
             }
@@ -52,14 +46,14 @@ class TransactionsViewModel @Inject constructor(
                 Log.d(TAG, "onComplete: completed")
             }
 
-            override fun onNext(t: List<transactionsEntity>) {
+            override fun onNext(t: List<TransactionsModel>) {
                 entityListLiveData.postValue(t)
             }
-        }, GetTransactionsListUseCase.Params(transactionsEntityList))
+        }, GetTransactionsListUseCase.Params(transactionsModelList))
     }
 
 
-    fun getMainBalance(): Double?{
+    fun getMainBalance(): Double? {
         return getMainBalanceUseCase.getMainBalance()
     }
 

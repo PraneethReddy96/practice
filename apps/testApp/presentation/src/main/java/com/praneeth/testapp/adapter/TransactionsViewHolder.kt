@@ -4,28 +4,33 @@ import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.praneeth.domain.transactionsEntity
+import com.praneeth.data.Constants.colorBlack
+import com.praneeth.data.Constants.colorGreen
+import com.praneeth.data.Constants.colorRed
+import com.praneeth.domain.model.TransactionsModel
 import com.praneeth.testapp.R
 
 class TransactionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    var time = view.findViewById<TextView>(R.id.tvTransactionTime)
-    var amount = view.findViewById<TextView>(R.id.tvTransactionAmount)
-    var type = view.findViewById<TextView>(R.id.tvTransactionType)
+    private var time = view.findViewById<TextView>(R.id.tvTransactionTime)
+    private var amount = view.findViewById<TextView>(R.id.tvTransactionAmount)
+    private var type = view.findViewById<TextView>(R.id.tvTransactionType)
 
 
-    fun setData(transactionsEntity: transactionsEntity) {
+    fun setData(TransactionsModel: TransactionsModel) {
 
-        time.text = transactionsEntity.time
-        amount.text = transactionsEntity.amount.toString()
+        time.text = TransactionsModel.time
+        time.setTextColor(Color.parseColor(colorBlack))
+        amount.text = "Available Balance :" + TransactionsModel.amount.toString()
+        amount.setTextColor(Color.parseColor(colorBlack))
 
-        if (transactionsEntity.type.equals("Credit")) {
-            type.text = transactionsEntity.type
-            type.setTextColor(Color.parseColor("#32CD32"))
+        if (TransactionsModel.type.equals("Credit")) {
+            type.text = "Amount Credited : " + TransactionsModel.transactionAmount.toString()
+            type.setTextColor(Color.parseColor(colorGreen))
         } else {
 
-            type.text = transactionsEntity.type
-            type.setTextColor(Color.parseColor("#FF0000"))
+            type.text = "Amount Debited : " + TransactionsModel.transactionAmount.toString()
+            type.setTextColor(Color.parseColor(colorRed))
         }
     }
 }
