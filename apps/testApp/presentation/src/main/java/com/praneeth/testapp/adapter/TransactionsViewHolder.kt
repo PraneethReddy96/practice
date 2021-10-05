@@ -17,20 +17,23 @@ class TransactionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private var type = view.findViewById<TextView>(R.id.tvTransactionType)
 
 
-    fun setData(TransactionsModel: TransactionsModel) {
+    fun setData(transactionsModel: TransactionsModel) {
 
-        time.text = TransactionsModel.time
+        time.text = transactionsModel.time.toString()
         time.setTextColor(Color.parseColor(colorBlack))
-        amount.text = "Available Balance :" + TransactionsModel.amount.toString()
-        amount.setTextColor(Color.parseColor(colorBlack))
 
-        if (TransactionsModel.type.equals("Credit")) {
-            type.text = "Amount Credited : " + TransactionsModel.transactionAmount.toString()
+        if ( transactionsModel.type.equals("credit")) {
+            type.text = "Amount Credited :"+ transactionsModel.transactionAmount.toString()
             type.setTextColor(Color.parseColor(colorGreen))
+            amount.text = "Available Balance :" + transactionsModel.amount.toString()
+            amount.setTextColor(Color.parseColor(colorBlack))
+
         } else {
 
-            type.text = "Amount Debited : " + TransactionsModel.transactionAmount.toString()
+            type.text = "Amount Debited :"+ transactionsModel.transactionAmount.toString()
             type.setTextColor(Color.parseColor(colorRed))
+            amount.text = "Available Balance :" + transactionsModel.amount.toString()
+            amount.setTextColor(Color.parseColor(colorBlack))
         }
     }
 }

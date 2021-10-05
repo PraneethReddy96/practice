@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.navGraphViewModels
@@ -33,12 +34,18 @@ class MakeTransactionsFragment : Fragment(R.layout.fragment_make_transactions) {
         binding.btnDebit.setOnClickListener(View.OnClickListener {
 
             transactionsViewModel.debit(binding.etTransactionTitle.text.toString(),
-                binding.etTransactionAmount.text.toString().toDouble(),binding.btnDebit.text.toString())
+                binding.etTransactionAmount.text.toString().toInt(),"debit")
+
+            transactionsViewModel.debitLiveData.observe(requireActivity(), Observer {
+
+
+                Toast.makeText(requireContext(),it.data?.message,Toast.LENGTH_SHORT).show()
+
+            })
 
             navController.navigate(R.id.action_makeTransactionsFragment_to_accountDetailsFragment)
             binding.etTransactionAmount.setText("")
             binding.etTransactionTitle.setText("")
-            Toast.makeText(requireContext(),"Transaction Successful!",Toast.LENGTH_SHORT).show()
         })
 
     }
@@ -47,13 +54,17 @@ class MakeTransactionsFragment : Fragment(R.layout.fragment_make_transactions) {
        binding.btnCredit.setOnClickListener(View.OnClickListener {
 
            transactionsViewModel.credit(binding.etTransactionTitle.text.toString(),
-               binding.etTransactionAmount.text.toString().toDouble(),binding.btnCredit.text.toString())
+               binding.etTransactionAmount.text.toString().toInt(),"credit")
 
+           transactionsViewModel.creditLiveData.observe(requireActivity(), Observer {
 
+               Toast.makeText(requireContext(),it.data?.message,Toast.LENGTH_SHORT).show()
+
+           })
            navController.navigate(R.id.action_makeTransactionsFragment_to_accountDetailsFragment)
            binding.etTransactionAmount.setText("")
            binding.etTransactionTitle.setText("")
-           Toast.makeText(requireContext(),"Transaction Successful!",Toast.LENGTH_SHORT).show()
+
        })
     }
 

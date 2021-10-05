@@ -15,8 +15,8 @@ class TransactionsAdapter(private val transactionList: MutableList<TransactionsM
     }
 
     override fun onBindViewHolder(holder: TransactionsViewHolder, position: Int) {
-        var transactionsEntity = transactionList[position]
-        holder.setData(transactionsEntity)
+        var transactionsModel = transactionList[position]
+        holder.setData(transactionsModel)
     }
 
     override fun getItemCount(): Int {

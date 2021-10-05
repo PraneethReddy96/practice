@@ -3,9 +3,7 @@ package com.praneeth.testapp
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -23,6 +21,7 @@ class AccountDetailsFragment : Fragment(R.layout.fragment_account_details) {
     private var transactionsList: MutableList<TransactionsModel> = mutableListOf()
     private var transactionsAdapter: TransactionsAdapter = TransactionsAdapter(transactionsList)
     lateinit var navController: NavController
+
     private val transactionsViewModel: TransactionsViewModel by
     navGraphViewModels(R.id.nav_transaction_details_xml) { defaultViewModelProviderFactory }
 
@@ -32,20 +31,34 @@ class AccountDetailsFragment : Fragment(R.layout.fragment_account_details) {
         binding = FragmentAccountDetailsBinding.bind(view)
         navController = Navigation.findNavController(view)
 
-
-        setBalance()
         binding.btnUpdate.setOnClickListener(View.OnClickListener {
             navController.navigate(R.id.action_accountDetailsFragment_to_makeTransactionsFragment)
         })
 
+    }
+
+
+
+    override fun onResume() {
+        super.onResume()
         buildRecyclerViewData()
         setRecyclerView()
+        setBalance()
     }
 
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        Log.d("TAGz", "onViewStateRestored: ")
+    }
     private fun setBalance() {
-        binding.tvTotal.text = transactionsViewModel.getMainBalance().toString()
-    }
+        transactionsViewModel.getMainBalance()
+        transactionsViewModel.mainBalanceLiveData.observe(requireActivity(), Observer {
 
+            binding.tvTotal.text =it.data?.balance.toString()
+
+        })
+    }
 
     private fun buildRecyclerViewData() {
         transactionsViewModel.getTransactions()
@@ -55,15 +68,13 @@ class AccountDetailsFragment : Fragment(R.layout.fragment_account_details) {
             transactionsAdapter.notifyDataSetChanged()
 
         })
-    }
 
+    }
     private fun setRecyclerView() {
         binding.apply {
             val llManager = LinearLayoutManager(requireContext())
             rvTransactionHistoryRecyclerView.layoutManager = llManager
             rvTransactionHistoryRecyclerView.adapter = transactionsAdapter
         }
-
     }
-
 }
